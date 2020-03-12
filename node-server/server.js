@@ -19,7 +19,7 @@ server.start();
 console.log(`gRPC Server Start on 0.0.0.0:40000`);
 
 
-const todos = []
+let todos = []
 function createTodo (call, callback) {
     const todoItem = {
         "id": todos.length + 1,
@@ -41,5 +41,7 @@ function readTodos(call, callback) {
 }
 
 function deleteTodo(call, callback) {
-
+    const todoId = call.request.id;
+    todos = todos.filter(todo => todo.id !== todoId);
+    callback(null);
 }
